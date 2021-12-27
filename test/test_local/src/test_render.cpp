@@ -1,5 +1,6 @@
 #include <unity.h>
 #include "widgets/widget.h"
+#include "widgets/widget_builder.h"
 namespace {
     Widget widget;
     Widget widget4;
@@ -35,10 +36,38 @@ namespace {
         TEST_ASSERT_EQUAL(0, widget4.get_x());
         TEST_ASSERT_EQUAL(110, widget5.get_x());
     }
+
+    void test_multiple_children(){
+        String data(R""""({
+        w:100,
+        h:200,
+        c:[
+            {
+                hs:true,
+                vs:true,
+                c:[{
+                    hs:true,
+                    vs:true,
+                    name: "test2"
+                }, {
+                    hs:true,
+                    vs:true,
+                    name: "test1"
+                }]
+            }
+        ]
+    }
+    )"""");
+        auto widget = widgetTools::build(data, 2048);
+        widget->poll();
+        TEST_ASSERT_EQUAL(50, widget -> find_by_name("test1")->get_x());
+        widgetTools::destroy(widget);
+    }
 }
 
 void test_render_main(){
     UNITY_BEGIN();
     RUN_TEST(test_widget);
+    RUN_TEST(test_multiple_children);
     UNITY_END();
 }
