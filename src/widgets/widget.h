@@ -145,7 +145,10 @@ class Widget{
                 widgets[i]->poll();
             }
             render(this);
-            draw();
+            if (main){
+                call_draw();
+            }
+            
         }
 
         void recalc_sizes(){
@@ -223,5 +226,11 @@ class Widget{
                     calculated_min_h = max(calculated_min_h, params.h);
                 }
                 //dbg_d("Calculated sum[%d]: minw: %d, minh: %d ", id, calculated_min_w, calculated_min_h);
+            }
+
+            void call_draw(){
+                for (int i=0; i < widgets.size(); i++){
+                    widgets[i]->draw();
+                }
             }
 };
