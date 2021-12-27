@@ -1,0 +1,12 @@
+
+
+main:
+  w: 100
+  h: 100
+  hs: false
+  vs: false
+  horz: false
+  visible: true
+  c:
+
+
