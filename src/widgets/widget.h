@@ -43,7 +43,7 @@ struct WidgetParams{
 class Widget{
     public: 
         WidgetParams params;
-        Widget * parent;
+        Widget * parent = 0;
         setter_getter(int, id);
         setter_getter(int, x);
         setter_getter(int, y);
