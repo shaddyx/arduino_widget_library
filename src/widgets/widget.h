@@ -159,12 +159,18 @@ class Widget{
             }
         }
         void call_adapt_sizes(){
+            if (!get_visible()) {
+                return;
+            }
             adapt_sizes();
             for (int i=0; i < widgets.size(); i++){
                 widgets[i] -> call_adapt_sizes();
             }
         }
         void call_render(){
+            if (!get_visible()) {
+                return;
+            }
             for (int i=0; i < widgets.size(); i++){
                 widgets[i] -> call_render();
             }
@@ -246,8 +252,12 @@ class Widget{
             }
 
             void call_draw(){
+                if (!get_visible()) {
+                    return;
+                }
+                draw();
                 for (int i=0; i < widgets.size(); i++){
-                    widgets[i]->draw();
+                    widgets[i]-> call_draw();
                 }
             }
 };
