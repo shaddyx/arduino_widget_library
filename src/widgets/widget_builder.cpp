@@ -16,6 +16,7 @@ namespace widgetTools {
         __WIDGET_JSON_PARSER_FILL_TEMPLATE(widget, data, bool, horz);
         __WIDGET_JSON_PARSER_FILL_TEMPLATE(widget, data, bool, hs);
         __WIDGET_JSON_PARSER_FILL_TEMPLATE(widget, data, bool, vs);
+        __WIDGET_JSON_PARSER_FILL_TEMPLATE(widget, data, bool, center);
         __WIDGET_JSON_PARSER_FILL_TEMPLATE(widget, data, String, name);
 
         if (data.containsKey("c")){

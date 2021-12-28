@@ -63,11 +63,32 @@ namespace {
         TEST_ASSERT_EQUAL(50, widget -> find_by_name("test1")->get_x());
         widgetTools::destroy(widget);
     }
+
+    void test_center(){
+        String data(R""""({
+            w:100,
+            h:200,
+            c:[
+                {
+                    name: "test1", 
+                    w: 20,
+                    h:20,
+                    center: true
+                }
+            ]
+        }
+        )"""");
+        auto widget = widgetTools::build(data, 2048);
+        widget->poll();
+        TEST_ASSERT_EQUAL(90, widget -> find_by_name("test1")->get_y());
+        widgetTools::destroy(widget);
+    }
 }
 
 void test_render_main(){
     UNITY_BEGIN();
     RUN_TEST(test_widget);
     RUN_TEST(test_multiple_children);
+    RUN_TEST(test_center);
     UNITY_END();
 }
