@@ -46,7 +46,7 @@ struct WidgetParams{
     int py = 0;
     bool hs = false;
     bool vs = false;
-    bool center = false;
+    bool centered = false;
     bool visible = true;
     bool horz = true;
 };
@@ -66,7 +66,7 @@ class Widget{
         setter_getter(int, py);
         setter_getter(bool, hs);
         setter_getter(bool, vs);
-        setter_getter(bool, center);
+        setter_getter(bool, centered);
         setter_getter(bool, visible);
         setter_getter(bool, horz);
         setter_getter(String, name);

@@ -73,7 +73,7 @@ namespace {
                     name: "test1", 
                     w: 20,
                     h:20,
-                    center: true
+                    centered: true
                 }
             ]
         }
