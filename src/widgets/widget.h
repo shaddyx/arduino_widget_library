@@ -149,19 +149,26 @@ class Widget{
         }
         
         void poll(){
-            adapt_sizes();
             if (main){
+                call_adapt_sizes();
                 calc_min_sizes();
                 recalc_sizes();
+                call_adapt_sizes();
                 call_render();
                 call_draw();
             }
         }
+        void call_adapt_sizes(){
+            adapt_sizes();
+            for (int i=0; i < widgets.size(); i++){
+                widgets[i] -> call_adapt_sizes();
+            }
+        }
         void call_render(){
-            render(this);
             for (int i=0; i < widgets.size(); i++){
                 widgets[i] -> call_render();
             }
+            render(this);
         }
 
         void recalc_sizes(){
