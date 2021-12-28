@@ -25,7 +25,12 @@ namespace widgetTools {
             widget_element -> set_h(value);
         }
     }
-    
+    Widget * find_main(Widget * self){
+        Widget * parent = self;
+        while ((parent = parent -> parent) != NULL && !parent -> main){
+        }
+        return parent;
+    }
     void stretch_main_direction(Widget * self) {
         
         //

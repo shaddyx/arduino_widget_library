@@ -15,11 +15,23 @@ namespace {
     static int __id_counter = 0;
 }
     #define setter_getter(type, name) \
-        Widget * set_##name(type name) {this->params.name = name; return this;} \
+        Widget * set_##name(type name) { \
+            if (this->params.name != name){\
+                this->params.name = name; \
+                this -> shouldRedraw = true; \
+            }\
+        return this;\
+        }\
         type get_##name() {return this -> params.name; }
 
     #define setter_getter_func(type, name, func) \
-        Widget * set_##name(type name) {this->params.name = name; return this;} \
+        Widget * set_##name(type name) { \
+            if (this->params.name != name){\
+                this->params.name = name; \
+                this -> shouldRedraw = true; \
+            }\
+        return this;\
+        } \
         type get_##name() func
     
 
@@ -44,6 +56,7 @@ class Widget{
     public: 
         WidgetParams params;
         Widget * parent = 0;
+        bool shouldRedraw = true;
         setter_getter(int, id);
         setter_getter(int, x);
         setter_getter(int, y);
@@ -134,29 +147,29 @@ class Widget{
 
         virtual void draw(){
         }
-
+        
         void poll(){
             adapt_sizes();
             if (main){
                 calc_min_sizes();
                 recalc_sizes();
-            }
-            for (int i=0; i < widgets.size(); i++){
-                widgets[i]->poll();
-            }
-            render(this);
-            if (main){
+                call_render();
                 call_draw();
             }
-            
+        }
+        void call_render(){
+            render(this);
+            for (int i=0; i < widgets.size(); i++){
+                widgets[i] -> call_render();
+            }
         }
 
         void recalc_sizes(){
-            adapt_sizes();
             if (!get_visible()){
                 dbg_d("skipping sizes recalculation due to invisibility[%d]", get_id());
                 return;
             }
+            adapt_sizes();
             stretch_main_direction(this);
             stretch_second_direction(this);
             
@@ -194,9 +207,6 @@ class Widget{
          
             int calculated_min_w = 0;
             int calculated_min_h = 0;
-
-            char calculated_w_percent = 100;
-            char calculated_h_percent = 100;
 
             void calc_min_sizes(){
                 int internal_min_w = 0;
