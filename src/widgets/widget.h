@@ -18,7 +18,6 @@ namespace {
         Widget * set_##name(type name) { \
             if (this->params.name != name){\
                 this->params.name = name; \
-                this -> shouldRedraw = true; \
             }\
         return this;\
         }\
@@ -28,7 +27,6 @@ namespace {
         Widget * set_##name(type name) { \
             if (this->params.name != name){\
                 this->params.name = name; \
-                this -> shouldRedraw = true; \
             }\
         return this;\
         } \
@@ -56,7 +54,6 @@ class Widget{
     public: 
         WidgetParams params;
         Widget * parent = 0;
-        bool shouldRedraw = true;
         setter_getter(int, id);
         setter_getter(int, x);
         setter_getter(int, y);
