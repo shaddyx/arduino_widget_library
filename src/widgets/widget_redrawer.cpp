@@ -107,8 +107,7 @@ namespace widgetTools {
     void stretch_second_direction(Widget * self) {
         int size = self -> get_horz() ? self -> get_inner_h() : self -> get_inner_w();
 
-        for (int i=0; i < self -> widgets.size(); i++){
-            auto widget = self -> widgets[i];
+        for (auto widget: self -> widgets){
             if (widget -> get_visible()){
                 if (!self -> get_horz() && widget -> get_hs()){
                     widget->set_w(size);
@@ -121,8 +120,7 @@ namespace widgetTools {
         
     int calc_space_to_stretch(Widget * self) {
         int space = self -> get_horz() ? self -> get_inner_w() : self -> get_inner_h();
-        for (int i=0; i < self -> widgets.size(); i++){
-            auto widget = self -> widgets[i];
+        for (auto widget: self -> widgets){
             if (!widget -> get_visible()){
                 continue;
             }
@@ -142,8 +140,7 @@ namespace widgetTools {
     std::vector<Widget *> get_stretchable_children(Widget * self, bool hor){
         std::vector<Widget *> list;
         list.reserve(self -> widgets.size());
-        for (int i=0; i < self -> widgets.size(); i++){
-            auto widget = self -> widgets[i];
+        for (auto widget: self -> widgets){
             if (widget -> get_visible()){
                 if ((hor && widget -> get_hs()) || (!hor && widget -> get_vs())){
                     list.push_back(widget);

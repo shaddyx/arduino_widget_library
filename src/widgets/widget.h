@@ -162,16 +162,16 @@ class Widget{
                 return;
             }
             adapt_sizes();
-            for (int i=0; i < widgets.size(); i++){
-                widgets[i] -> call_adapt_sizes();
+            for (auto widget: widgets){
+                widget -> call_adapt_sizes();
             }
         }
         void call_render(){
             if (!get_visible()) {
                 return;
             }
-            for (int i=0; i < widgets.size(); i++){
-                widgets[i] -> call_render();
+            for (auto widget: widgets){
+                widget -> call_render();
             }
             render(this);
         }
@@ -184,9 +184,9 @@ class Widget{
             adapt_sizes();
             stretch_main_direction(this);
             stretch_second_direction(this);
+            for (auto widget: widgets){
             
-            for (int i=0; i < widgets.size(); i++){
-                widgets[i] -> recalc_sizes();
+                widget -> recalc_sizes();
             }
         }
 
@@ -205,8 +205,7 @@ class Widget{
             if (name == this->params.name){
                 return this;
             }
-            for (int i=0; i < widgets.size(); i++){
-                auto widget = widgets[i];
+            for (auto widget: widgets){
                 auto res = widget->find_by_name(name);
                 if (res){
                     return res;
@@ -223,8 +222,7 @@ class Widget{
             void calc_min_sizes(){
                 int internal_min_w = 0;
                 int internal_min_h = 0;
-                for (int i=0; i < widgets.size(); i++){
-                    auto widget = widgets[i];
+                for (auto widget: widgets){
                     if (! widget -> get_visible()){
                         continue;
                     }
@@ -255,8 +253,8 @@ class Widget{
                     return;
                 }
                 draw();
-                for (int i=0; i < widgets.size(); i++){
-                    widgets[i]-> call_draw();
+                for (auto widget: widgets){
+                    widget -> call_draw();
                 }
             }
 };
