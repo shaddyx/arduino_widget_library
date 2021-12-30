@@ -42,8 +42,8 @@ struct WidgetParams{
     int h = 0;
     int min_w = 0;
     int min_h = 0;
-    int dx = 0;
-    int dy = 0;
+    int px = 0;
+    int py = 0;
     bool hs = false;
     bool vs = false;
     bool centered = false;
@@ -62,8 +62,8 @@ class Widget{
         setter_getter_func(int, h, { return max(get_min_h(), params.h);});
         setter_getter_func(int, min_w, { return max(calculated_min_w, params.min_w); });
         setter_getter_func(int, min_h, { return max(calculated_min_h, params.min_h); });
-        setter_getter(int, dx);
-        setter_getter(int, dy);
+        setter_getter(int, px);
+        setter_getter(int, py);
         setter_getter(bool, hs);
         setter_getter(bool, vs);
         setter_getter(bool, centered);
@@ -95,6 +95,14 @@ class Widget{
                 widgets.push_back(widget);
             }
             return this;
+        }
+
+        virtual int get_dx(){
+            return this->get_px() * 2;
+        }
+        
+        virtual int get_dy(){
+            return this->get_py() * 2;
         }
         
         void clear(){
@@ -137,11 +145,11 @@ class Widget{
         }
         
         int get_inner_w(){
-            return this -> get_w() - this->get_dx() * 2;
+            return this -> get_w() - this->get_dx();
         }
 
         int get_inner_h(){
-            return this -> get_h() - this->get_dy() * 2;
+            return this -> get_h() - this->get_dy();
         }
 
         virtual void draw(){
@@ -237,8 +245,8 @@ class Widget{
                     }
                     dbg_d("Calculated[%d] internal minw: %d, internal minh: %d ", get_id(), internal_min_w, internal_min_h);
                 }
-                calculated_min_w = internal_min_w + get_dx() * 2;
-                calculated_min_h = internal_min_h + get_dy() * 2;
+                calculated_min_w = internal_min_w + get_dx();
+                calculated_min_h = internal_min_h + get_dy();
                 if (!get_hs()){
                     calculated_min_w = max(calculated_min_w, params.w);
                 }

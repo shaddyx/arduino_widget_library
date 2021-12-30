@@ -11,8 +11,8 @@ namespace widgetTools {
         __WIDGET_JSON_PARSER_FILL_TEMPLATE(widget, data, int, h);
         __WIDGET_JSON_PARSER_FILL_TEMPLATE(widget, data, int, min_w);
         __WIDGET_JSON_PARSER_FILL_TEMPLATE(widget, data, int, min_h);
-        __WIDGET_JSON_PARSER_FILL_TEMPLATE(widget, data, int, dx);
-        __WIDGET_JSON_PARSER_FILL_TEMPLATE(widget, data, int, dy);
+        __WIDGET_JSON_PARSER_FILL_TEMPLATE(widget, data, int, px);
+        __WIDGET_JSON_PARSER_FILL_TEMPLATE(widget, data, int, py);
         __WIDGET_JSON_PARSER_FILL_TEMPLATE(widget, data, bool, horz);
         __WIDGET_JSON_PARSER_FILL_TEMPLATE(widget, data, bool, hs);
         __WIDGET_JSON_PARSER_FILL_TEMPLATE(widget, data, bool, vs);

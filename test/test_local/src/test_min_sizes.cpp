@@ -52,8 +52,8 @@ void test_widget_margin(){
     generate();
     widget.set_w(0);
     widget.set_h(0);
-    widget.set_dx(5);
-    widget.set_dy(5);
+    widget.set_px(5);
+    widget.set_py(5);
     widget.set_horz(true);
     widget.get(0)->set_min_w(20);
     widget.get(0)->set_min_h(25);
@@ -68,8 +68,8 @@ void test_widget_sizes(){
     generate();
     widget.set_w(0);
     widget.set_h(0);
-    widget.set_dx(5);
-    widget.set_dy(5);
+    widget.set_px(5);
+    widget.set_py(5);
     widget.set_horz(true);
     widget.get(0)->set_min_w(20);
     widget.get(0)->set_min_h(25);

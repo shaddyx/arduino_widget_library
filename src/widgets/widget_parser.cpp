@@ -34,10 +34,10 @@ namespace widgetTools{
             widget -> set_horz(str_util::parse_bool(value));
         } else if (name == "dx"){
             dbg_d("setting horz to: %s", value.c_str());
-            widget -> set_dx(str_util::parse_int(value));
+            widget -> set_px(str_util::parse_int(value));
         } else if (name == "dy"){
             dbg_d("setting horz to: %s", value.c_str());
-            widget -> set_dy(str_util::parse_int(value));
+            widget -> set_py(str_util::parse_int(value));
         } else {
             dbg_d("ERROR: unknown property: %s", name);
         }

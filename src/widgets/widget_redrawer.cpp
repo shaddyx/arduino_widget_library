@@ -14,7 +14,7 @@ namespace widgetTools {
         return self -> get_horz() ? widget_element -> get_w() : widget_element -> get_h();
     }
 
-    int stretch_padding_value(Widget * self, Widget * widget_element){
+    int stretch_dx_value(Widget * self, Widget * widget_element){
         return self -> get_horz() ? widget_element -> get_dx() : widget_element -> get_dy();
     }
 
