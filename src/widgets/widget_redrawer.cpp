@@ -15,7 +15,7 @@ namespace widgetTools {
     }
 
     int stretch_padding_value(Widget * self, Widget * widget_element){
-        return self -> get_horz() ? widget_element -> get_px() : widget_element -> get_py();
+        return self -> get_horz() ? widget_element -> get_dx() : widget_element -> get_dy();
     }
 
     void set_stretch_value(Widget * self, Widget * widget_element, int value){

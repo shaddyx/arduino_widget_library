@@ -9,8 +9,8 @@ namespace {
         widget1.set_horz(true);
         widget1.set_w(10);
         widget1.set_h(10);
-        widget1.set_px(3);
-        widget1.set_py(5);
+        widget1.set_dx(3);
+        widget1.set_dy(5);
         
         widget2.set_min_w(10);
         widget2.set_min_h(10);
@@ -36,8 +36,8 @@ namespace {
         widget4.set_horz(false);
         widget4.set_w(10);
         widget4.set_h(10);
-        widget4.set_px(3);
-        widget4.set_py(5);
+        widget4.set_dx(3);
+        widget4.set_dy(5);
         
         widget5.set_min_w(10);
         widget5.set_min_h(10);
@@ -66,8 +66,8 @@ namespace {
         widget8.set_horz(true);
         widget8.set_w(100);
         widget8.set_h(200);
-        widget8.set_px(3);
-        widget8.set_py(5);
+        widget8.set_dx(3);
+        widget8.set_dy(5);
         
         widget9.set_min_w(10);
         widget9.set_min_h(10);
