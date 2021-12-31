@@ -132,6 +132,19 @@ class Widget{
         Widget * get(int index){
             return widgets[index];
         }
+        
+        bool visible_in_tree(){
+            Widget * parent = this;
+            if (!get_visible()){
+                return false;
+            }
+            while ((parent = parent -> parent) != NULL){
+                if (!parent -> get_visible()){
+                    return false;
+                }
+            }
+            return true;
+        }
 
         int get_abs_x(){
             int res = this -> get_x();
@@ -178,6 +191,7 @@ class Widget{
                 call_pre_draw();
                 call_adapt_sizes();
                 calc_min_sizes();
+                call_adapt_sizes();
                 recalc_sizes();
                 call_adapt_sizes();
                 call_render();
