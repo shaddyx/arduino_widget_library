@@ -6,32 +6,32 @@ namespace widgetTools {
         return a < b ? b : a;
     }
 
-    int stretch_min_size_value(Widget * self, Widget * widget_element){
+    int stretch_min_size_value(std::shared_ptr<Widget>  self, std::shared_ptr<Widget>  widget_element){
         return self -> get_horz() ? widget_element -> get_min_w() : widget_element -> get_min_h();
     }
 
-    int stretch_size_value(Widget * self, Widget * widget_element){
+    int stretch_size_value(std::shared_ptr<Widget>  self, std::shared_ptr<Widget>  widget_element){
         return self -> get_horz() ? widget_element -> get_w() : widget_element -> get_h();
     }
 
-    int stretch_dx_value(Widget * self, Widget * widget_element){
+    int stretch_dx_value(std::shared_ptr<Widget>  self, std::shared_ptr<Widget>  widget_element){
         return self -> get_horz() ? widget_element -> get_dx() : widget_element -> get_dy();
     }
 
-    void set_stretch_value(Widget * self, Widget * widget_element, int value){
+    void set_stretch_value(std::shared_ptr<Widget>  self, std::shared_ptr<Widget>  widget_element, int value){
         if (self -> get_horz()){
             widget_element -> set_w(value);
         } else {
             widget_element -> set_h(value);
         }
     }
-    Widget * find_main(Widget * self){
-        Widget * parent = self;
-        while ((parent = parent -> parent) != NULL && !parent -> main){
+    std::shared_ptr<Widget>  find_main(std::shared_ptr<Widget>  self){
+        std::shared_ptr<Widget>  parent = self;
+        while ((parent = parent -> parent.lock()) != NULL && !parent -> main){
         }
         return parent;
     }
-    void stretch_main_direction(Widget * self) {
+    void stretch_main_direction(std::shared_ptr<Widget>  self) {
         
         //
         //  assuming we have all min sizes here
@@ -42,7 +42,7 @@ namespace widgetTools {
         int skip_count = 0;
         bool foundSmaller;
 
-        std::vector<Widget *> widgets_to_stretch = get_stretchable_children(self, self -> get_horz());
+        std::vector<std::shared_ptr<Widget> > widgets_to_stretch = get_stretchable_children(self, self -> get_horz());
         dbg_d("widgets to stretch[%d]: %d, lastInner: %d, w:%d, h:%d, mw:%d, mh:%d, inner_w: %d", self -> get_id(), 
             widgets_to_stretch.size(), 
             lastInner, 
@@ -104,7 +104,7 @@ namespace widgetTools {
         }
     }
         
-    void stretch_second_direction(Widget * self) {
+    void stretch_second_direction(std::shared_ptr<Widget>  self) {
         int size = self -> get_horz() ? self -> get_inner_h() : self -> get_inner_w();
 
         for (auto widget: self -> widgets){
@@ -118,7 +118,7 @@ namespace widgetTools {
         }
     }
         
-    int calc_space_to_stretch(Widget * self) {
+    int calc_space_to_stretch(std::shared_ptr<Widget>  self) {
         int space = self -> get_horz() ? self -> get_inner_w() : self -> get_inner_h();
         for (auto widget: self -> widgets){
             if (!widget -> get_visible()){
@@ -137,8 +137,8 @@ namespace widgetTools {
         return space;
     }
 
-    std::vector<Widget *> get_stretchable_children(Widget * self, bool hor){
-        std::vector<Widget *> list;
+    std::vector<std::shared_ptr<Widget> > get_stretchable_children(std::shared_ptr<Widget> self, bool hor){
+        std::vector<std::shared_ptr<Widget> > list;
         list.reserve(self -> widgets.size());
         for (auto widget: self -> widgets){
             if (widget -> get_visible()){

@@ -29,7 +29,6 @@ void test_build(){
     auto test1 = widget -> find_by_name("test2");
     TEST_ASSERT_TRUE(test1);
     TEST_ASSERT_EQUAL_STRING("test2", test1 -> get_name().c_str());
-    widgetTools::destroy(widget);
 }
 void test_build_main(){
     RUN_TEST(test_build);

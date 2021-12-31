@@ -5,8 +5,8 @@
 namespace widgetTools {
     #define __WIDGET_JSON_PARSER_FILL_TEMPLATE(WIDGET,DOC,TYPE, NAME) if (DOC.containsKey(#NAME)) WIDGET -> set_##NAME(DOC[#NAME].as<TYPE>());
     
-    Widget * build(JsonObject data){
-        auto widget = new Widget();
+    std::shared_ptr<Widget> build(JsonObject data){
+        auto widget = std::shared_ptr<Widget> (new Widget());
         __WIDGET_JSON_PARSER_FILL_TEMPLATE(widget, data, int, w);
         __WIDGET_JSON_PARSER_FILL_TEMPLATE(widget, data, int, h);
         __WIDGET_JSON_PARSER_FILL_TEMPLATE(widget, data, int, min_w);
@@ -23,24 +23,15 @@ namespace widgetTools {
             dbg_d("Children exists")
             auto c = data["c"].as<JsonArray>();
             for(JsonVariant v : c) {
-                auto child = build(v);
-                widget->add(child);
+                widget->add(build(v));
             }
         }
         return widget;
     }
 
-    Widget * build(const String &data, int size){
+    std::shared_ptr<Widget>  build(const String &data, int size){
         DynamicJsonDocument doc(size);
         deserializeJson(doc, data.c_str());
         return build(doc.as<JsonObject>());
     }
-
-    void destroy(Widget * widget){
-        for (int i=0; i<widget -> widgets.size(); i++){
-            destroy(widget ->widgets[i]);
-        }
-        delete widget;
-    }
-   
 }

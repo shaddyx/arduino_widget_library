@@ -2,5 +2,5 @@
 #include "widget.h"
 class Widget;
 namespace widgetTools {
-    void render(Widget * self);
+    void render(std::shared_ptr<Widget>  self);
 };

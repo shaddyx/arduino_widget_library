@@ -6,7 +6,7 @@
 
 namespace widgetTools{
     
-    void parse_token(Widget * widget, const String & param){
+    void parse_token(std::shared_ptr<Widget>  widget, const String & param){
         auto name = str_util::get_left_token(param, ":");
         name.trim();
         auto value = str_util::get_right_token(param, ":");
@@ -44,7 +44,7 @@ namespace widgetTools{
 
     }
 
-    void parse(Widget * widget, const String &params){
+    void parse(std::shared_ptr<Widget>  widget, const String &params){
         dbg_d("parsing string: %s", params.c_str());
         int number = str_util::token_count(params, ",");
         for (int i =0; i < number; i++){

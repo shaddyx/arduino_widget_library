@@ -3,5 +3,5 @@
 #include "widget.h"
 #include <Arduino.h>
 namespace widgetTools {
-    void parse(Widget * widget, const String &params);
+    void parse(std::shared_ptr<Widget>  widget, const String &params);
 }

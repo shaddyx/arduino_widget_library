@@ -15,20 +15,20 @@ namespace {
     static int __id_counter = 0;
 }
     #define setter_getter(type, name) \
-        Widget * set_##name(type name) { \
+        std::shared_ptr<Widget>  set_##name(type name) { \
             if (this->params.name != name){\
                 this->params.name = name; \
             }\
-        return this;\
+        return shared_from_this();\
         }\
         type get_##name() {return this -> params.name; }
 
     #define setter_getter_func(type, name, func) \
-        Widget * set_##name(type name) { \
+        std::shared_ptr<Widget>  set_##name(type name) { \
             if (this->params.name != name){\
                 this->params.name = name; \
             }\
-        return this;\
+        return shared_from_this();\
         } \
         type get_##name() func
     
@@ -51,10 +51,10 @@ struct WidgetParams{
     bool horz = true;
 };
 
-class Widget{
+class Widget: public std::enable_shared_from_this<Widget>{
     public: 
         WidgetParams params;
-        Widget * parent = 0;
+        std::weak_ptr<Widget> parent;
         setter_getter(int, id);
         setter_getter(int, x);
         setter_getter(int, y);
@@ -71,7 +71,7 @@ class Widget{
         setter_getter(bool, horz);
         setter_getter(String, name);
         
-        std::vector<Widget *> widgets;
+        std::vector<std::shared_ptr<Widget>> widgets;
 
         char percent = 100;
         bool updated = false;
@@ -82,19 +82,15 @@ class Widget{
         }
         
         Widget(const String &params){
-            widgetTools::parse(this, params);
+            widgetTools::parse(shared_from_this(), params);
         }
         
-        Widget * add(Widget &widget){
-            return add(&widget);
-        }
-
-        Widget * add(Widget * widget){
-            if (widget && widget != this){
-                widget -> parent = this;
+        std::shared_ptr<Widget> add(std::shared_ptr<Widget> widget){
+            if (widget && widget != shared_from_this()){
+                widget -> parent = shared_from_this();
                 widgets.push_back(widget);
             }
-            return this;
+            return shared_from_this();
         }
 
         virtual int get_dx(){
@@ -109,18 +105,14 @@ class Widget{
             widgets.clear();
         }
 
-        Widget * start(){
-            return this;
-        }
-
-        Widget * get(int index){
+        std::shared_ptr<Widget> get(int index){
             return widgets[index];
         }
 
         int get_abs_x(){
             int res = this -> get_x();
-            Widget * parent = this;
-            while ((parent = parent -> parent) != NULL){
+            std::shared_ptr<Widget> parent = shared_from_this();
+            while ((parent = parent -> parent.lock()) != nullptr){
                 res += parent -> get_x();
             }
 
@@ -129,8 +121,8 @@ class Widget{
 
         int get_abs_y(){
             int res = this -> get_y();
-            Widget * parent = this;
-            while ((parent = parent -> parent) != NULL){
+            auto parent = shared_from_this();
+            while ((parent = parent -> parent.lock()) != nullptr){
                 res += parent -> get_y();
             }
             return res;
@@ -181,7 +173,7 @@ class Widget{
             for (auto widget: widgets){
                 widget -> call_render();
             }
-            render(this);
+            render(shared_from_this());
         }
 
         void recalc_sizes(){
@@ -190,8 +182,8 @@ class Widget{
                 return;
             }
             adapt_sizes();
-            stretch_main_direction(this);
-            stretch_second_direction(this);
+            stretch_main_direction(shared_from_this());
+            stretch_second_direction(shared_from_this());
             for (auto widget: widgets){
             
                 widget -> recalc_sizes();
@@ -209,9 +201,9 @@ class Widget{
             set_h(max(get_h(), get_min_h()));
         }
 
-        Widget * find_by_name(const String &name){
+        std::shared_ptr<Widget> find_by_name(const String &name){
             if (name == this->params.name){
-                return this;
+                return shared_from_this();
             }
             for (auto widget: widgets){
                 auto res = widget->find_by_name(name);

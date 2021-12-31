@@ -5,7 +5,7 @@ namespace widgetTools{
         return (w - child_w) / 2;
     }
 
-    void render(Widget * self) {
+    void render(std::shared_ptr<Widget>  self) {
         int x = 0;
         int y = 0;
         for (auto widget: self -> widgets){
