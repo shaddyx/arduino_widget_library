@@ -83,6 +83,30 @@ namespace {
         TEST_ASSERT_EQUAL(90, widget -> find_by_name("test1")->get_y());
         widgetTools::destroy(widget);
     }
+
+      void test_paddings(){
+        String data(R""""({
+            w:100,
+            h:200,
+            px: 5,
+            py: 6,
+            c:[
+                {
+                    name: "test1", 
+                    w: 20,
+                    h:20,
+                    centered: true
+                }
+            ]
+        }
+        )"""");
+        auto widget = widgetTools::build(data, 2048);
+        widget->poll();
+        auto w =  widget -> find_by_name("test1");
+        TEST_ASSERT_EQUAL(84, w->get_y());
+        TEST_ASSERT_EQUAL(5, w->get_x());
+        widgetTools::destroy(widget);
+    }
 }
 
 void test_render_main(){
@@ -90,5 +114,6 @@ void test_render_main(){
     RUN_TEST(test_widget);
     RUN_TEST(test_multiple_children);
     RUN_TEST(test_center);
+    RUN_TEST(test_paddings);
     UNITY_END();
 }

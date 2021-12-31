@@ -6,8 +6,8 @@ namespace widgetTools{
     }
 
     void render(Widget * self) {
-        int x = 0;
-        int y = 0;
+        int x = self -> get_dx() / 2;
+        int y = self -> get_dy() / 2;
         for (auto widget: self -> widgets){
             if (widget -> get_visible()){
                 widget -> set_x(x);
