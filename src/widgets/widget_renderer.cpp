@@ -6,8 +6,8 @@ namespace widgetTools{
     }
 
     void render(Widget * self) {
-        int x = self -> get_dx() / 2;
-        int y = self -> get_dy() / 2;
+        int x = self -> get_dx();
+        int y = self -> get_dy();
         for (auto widget: self -> widgets){
             if (widget -> get_visible()){
                 widget -> set_x(x);
@@ -15,12 +15,12 @@ namespace widgetTools{
                 if (self -> get_horz()){
                     x += widget->get_w();
                     if (widget -> get_centered()){
-                        widget -> set_y(get_center(self -> get_inner_h(), widget -> get_h()));
+                        widget -> set_y(y + get_center(self -> get_inner_h(), widget -> get_h()));
                     }
                 } else {
                     y += widget->get_h();
                     if (widget -> get_centered()){
-                        widget -> set_x(get_center(self -> get_inner_w(), widget -> get_w()));
+                        widget -> set_x(x + get_center(self -> get_inner_w(), widget -> get_w()));
                     }
                 }
             }

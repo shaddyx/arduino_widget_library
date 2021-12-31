@@ -15,7 +15,7 @@ namespace widgetTools {
     }
 
     int stretch_dx_value(Widget * self, Widget * widget_element){
-        return self -> get_horz() ? widget_element -> get_dx() : widget_element -> get_dy();
+        return self -> get_horz() ? widget_element -> get_full_dx() : widget_element -> get_full_dy();
     }
 
     void set_stretch_value(Widget * self, Widget * widget_element, int value){

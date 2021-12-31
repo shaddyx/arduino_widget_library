@@ -94,7 +94,7 @@ namespace {
                 {
                     name: "test1", 
                     w: 20,
-                    h:20,
+                    h: 20,
                     centered: true
                 }
             ]
@@ -103,7 +103,7 @@ namespace {
         auto widget = widgetTools::build(data, 2048);
         widget->poll();
         auto w =  widget -> find_by_name("test1");
-        TEST_ASSERT_EQUAL(84, w->get_y());
+        TEST_ASSERT_EQUAL(90, w->get_y());
         TEST_ASSERT_EQUAL(5, w->get_x());
         widgetTools::destroy(widget);
     }

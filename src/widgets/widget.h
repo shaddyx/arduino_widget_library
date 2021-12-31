@@ -97,12 +97,28 @@ class Widget{
             return this;
         }
 
+        int get_full_dx(){
+            return get_dx() + get_dx1();
+        }
+        
+        int get_full_dy(){
+            return get_dy() + get_dy1();
+        }
+
         virtual int get_dx(){
-            return this->get_px() * 2;
+            return this->get_px();
         }
         
         virtual int get_dy(){
-            return this->get_py() * 2;
+            return this->get_py();
+        }
+
+        virtual int get_dx1(){
+            return this->get_px();
+        }
+        
+        virtual int get_dy1(){
+            return this->get_py();
         }
         
         void clear(){
@@ -145,11 +161,11 @@ class Widget{
         }
         
         int get_inner_w(){
-            return this -> get_w() - this->get_dx();
+            return this -> get_w() - this->get_full_dx();
         }
 
         int get_inner_h(){
-            return this -> get_h() - this->get_dy();
+            return this -> get_h() - this->get_full_dy();
         }
 
         virtual void draw(){
@@ -245,8 +261,8 @@ class Widget{
                     }
                     dbg_d("Calculated[%d] internal minw: %d, internal minh: %d ", get_id(), internal_min_w, internal_min_h);
                 }
-                calculated_min_w = internal_min_w + get_dx();
-                calculated_min_h = internal_min_h + get_dy();
+                calculated_min_w = internal_min_w + get_full_dx();
+                calculated_min_h = internal_min_h + get_full_dy();
                 if (!get_hs()){
                     calculated_min_w = max(calculated_min_w, params.w);
                 }
