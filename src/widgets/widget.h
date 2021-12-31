@@ -170,9 +170,12 @@ class Widget{
 
         virtual void draw(){
         }
-        
+        virtual void pre_draw(){
+
+        }
         void poll(){
             if (main){
+                call_pre_draw();
                 call_adapt_sizes();
                 calc_min_sizes();
                 recalc_sizes();
@@ -181,6 +184,7 @@ class Widget{
                 call_draw();
             }
         }
+
         void call_adapt_sizes(){
             if (!get_visible()) {
                 return;
@@ -279,6 +283,15 @@ class Widget{
                 draw();
                 for (auto widget: widgets){
                     widget -> call_draw();
+                }
+            }
+            void call_pre_draw(){
+                if (!get_visible()) {
+                    return;
+                }
+                pre_draw();
+                for (auto widget: widgets){
+                    widget -> call_pre_draw();
                 }
             }
 };
