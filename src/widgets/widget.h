@@ -191,7 +191,6 @@ class Widget{
                 call_pre_draw();
                 call_adapt_sizes();
                 calc_min_sizes();
-                call_adapt_sizes();
                 recalc_sizes();
                 call_adapt_sizes();
                 call_render();

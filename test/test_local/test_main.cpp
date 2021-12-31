@@ -7,6 +7,7 @@
 #include "src/test_widget_utils.h"
 #include "src/test_build.h"
 #include "src/test_abs.h"
+#include "src/test_redraw.h"
 
 int main(){
     test_min_sizes_main();
@@ -16,4 +17,5 @@ int main(){
     test_widget_utils_main();
     test_build_main();
     test_abs_main();
+    test_redraw_main();
 }

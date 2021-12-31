@@ -129,7 +129,7 @@ namespace widgetTools {
                     space -= widget -> get_w();
                 }
             } else {
-                if (!widget -> get_hs()){
+                if (!widget -> get_vs()){
                     space -= widget -> get_h();
                 }
             }
