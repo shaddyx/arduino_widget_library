@@ -97,6 +97,10 @@ class Widget{
             return this;
         }
 
+        virtual ~Widget() {
+
+        }
+
         int get_full_dx(){
             return get_dx() + get_dx1();
         }

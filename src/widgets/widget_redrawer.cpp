@@ -120,6 +120,7 @@ namespace widgetTools {
         
     int calc_space_to_stretch(Widget * self) {
         int space = self -> get_horz() ? self -> get_inner_w() : self -> get_inner_h();
+        
         for (auto widget: self -> widgets){
             if (!widget -> get_visible()){
                 continue;
