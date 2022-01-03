@@ -1,27 +1,27 @@
 #pragma once
 
-#define NONE 0
-#define ERROR 1
-#define INFO 2
-#define DEBUG 3
+#define WDBG_NONE 0
+#define WDBG_ERROR 1
+#define WDBG_INFO 2
+#define WDBG_DEBUG 3
 
-#ifndef DEBUG_LEVEL
-    #define DEBUG_LEVEL NONE
+#ifndef WDBG_LEVEL
+    #define WDBG_LEVEL WDBG_NONE
 #endif 
 
-#if DEBUG_LEVEL >= INFO
+#if WDBG_LEVEL >= INFO
     #define dbg(...) printf("%s:%d ", __FILE__, __LINE__); printf(__VA_ARGS__); printf("\n");
 #else
     #define dbg(...) 
 #endif
 
-#if DEBUG_LEVEL >= DEBUG
+#if WDBG_LEVEL >= DEBUG
     #define dbg_d(...) printf("%s:%d ", __FILE__, __LINE__); printf(__VA_ARGS__); printf("\n");
 #else
     #define dbg_d(...) 
 #endif
 
-#if DEBUG_LEVEL >= ERROR
+#if WDBG_LEVEL >= ERROR
     #define dbg_e(...) printf("%s:%d ", __FILE__, __LINE__); printf(__VA_ARGS__); printf("\n");
 #else
     #define dbg_e(...) 
