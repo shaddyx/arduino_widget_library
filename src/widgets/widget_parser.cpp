@@ -39,7 +39,7 @@ namespace widgetTools{
             dbg_d("setting horz to: %s", value.c_str());
             widget -> set_py(str_util::parse_int(value));
         } else {
-            dbg_d("ERROR: unknown property: %s", name);
+            dbg_d("ERROR: unknown property: %s", name.c_str());
         }
 
     }

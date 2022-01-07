@@ -43,8 +43,8 @@ namespace widgetTools {
         bool foundSmaller;
 
         std::vector<Widget *> widgets_to_stretch = get_stretchable_children(self, self -> get_horz());
-        dbg_d("widgets to stretch[%d]: %ld, lastInner: %d, w:%d, h:%d, mw:%d, mh:%d, inner_w: %d", self -> get_id(), 
-            widgets_to_stretch.size(), 
+        dbg_d("widgets to stretch[%d]: %d, lastInner: %d, w:%d, h:%d, mw:%d, mh:%d, inner_w: %d", self -> get_id(), 
+            int(widgets_to_stretch.size()), 
             lastInner, 
             self -> get_w(), 
             self -> get_h(), 
@@ -84,7 +84,7 @@ namespace widgetTools {
             int lastValue = lastInner - skipInner;
             dbg_d("lastValue [%d] is: %d", self -> get_id(), lastValue);
             auto newSize = floor(lastValue / float(widgets_to_stretch.size() - skip_count));
-            dbg_d("newSize [%d] is: %f, count: %ld, skipCount: %d", self -> get_id(), newSize, widgets_to_stretch.size() - skip_count, skip_count);
+            dbg_d("newSize [%d] is: %f, count: %d, skipCount: %d", self -> get_id(), newSize, int(widgets_to_stretch.size() - skip_count), skip_count);
 
             for (int i=0; i < widgets_to_stretch.size(); i++){
                 auto widget = widgets_to_stretch[i];
