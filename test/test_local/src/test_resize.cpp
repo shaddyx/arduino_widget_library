@@ -127,6 +127,30 @@ namespace {
         TEST_ASSERT_EQUAL(230, widgetD.get_w());
 
     }
+    void test_resize_left_smaller_min_w(){
+          Widget widgetA;
+        Widget widgetB;
+        Widget widgetC;
+        widgetA.start()
+            -> add(& widgetB)
+            -> add(& widgetC)
+            -> set_horz(true)
+            -> set_w(100)
+            -> set_h(50);
+
+            widgetB.start()
+                -> set_hs(true)
+                -> set_min_w(10);
+            
+            widgetC.start()
+                -> set_hs(true)
+                -> set_min_w(70);
+        widgetA.poll();
+        TEST_ASSERT_EQUAL(70, widgetC.get_w());
+        TEST_ASSERT_EQUAL(30, widgetB.get_w());
+        TEST_ASSERT_EQUAL(100, widgetA.get_w());
+
+    }
 }
 void test_resize_main(){
     UNITY_BEGIN();
@@ -134,5 +158,6 @@ void test_resize_main(){
     RUN_TEST(test_widget_resize_vert);
     RUN_TEST(test_widget_resize_horz_big_parent);
     RUN_TEST(test_many_children);
+    RUN_TEST(test_resize_left_smaller_min_w);
     UNITY_END();
 }
