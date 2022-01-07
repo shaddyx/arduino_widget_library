@@ -49,6 +49,7 @@ struct WidgetParams{
     bool centered = false;
     bool visible = true;
     bool horz = true;
+    int percent = 100;
 };
 
 class Widget{
@@ -70,10 +71,9 @@ class Widget{
         setter_getter(bool, visible);
         setter_getter(bool, horz);
         setter_getter(String, name);
+        setter_getter(int, percent);
         
         std::vector<Widget *> widgets;
-
-        char percent = 100;
         bool updated = false;
         bool main = true;
         bool should_draw = true;

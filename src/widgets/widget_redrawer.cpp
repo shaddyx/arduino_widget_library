@@ -43,7 +43,7 @@ namespace widgetTools {
         bool foundSmaller;
 
         std::vector<Widget *> widgets_to_stretch = get_stretchable_children(self, self -> get_horz());
-        dbg_d("widgets to stretch[%d]: %d, lastInner: %d, w:%d, h:%d, mw:%d, mh:%d, inner_w: %d", self -> get_id(), 
+        dbg_d("widgets to stretch[%d]: %ld, lastInner: %d, w:%d, h:%d, mw:%d, mh:%d, inner_w: %d", self -> get_id(), 
             widgets_to_stretch.size(), 
             lastInner, 
             self -> get_w(), 
@@ -57,7 +57,7 @@ namespace widgetTools {
                 int newSize = floor((lastInner - skipInner) / (widgets_to_stretch.size() - skip_count));
                 auto widget = widgets_to_stretch[i];
                 if (widget){
-                    float sizeToApply =  widget -> percent * newSize / 100;
+                    float sizeToApply =  widget -> get_percent() * newSize / 100;
                     // dbg_d("SizeToApply [%d]: minw: %d sizeToApply: %f", 
                     //     widget -> get_id(), 
                     //     stretch_min_size_value(self, widget), 
@@ -84,12 +84,12 @@ namespace widgetTools {
             int lastValue = lastInner - skipInner;
             dbg_d("lastValue [%d] is: %d", self -> get_id(), lastValue);
             auto newSize = floor(lastValue / float(widgets_to_stretch.size() - skip_count));
-            dbg_d("newSize [%d] is: %f, count: %d, skipCount: %d", self -> get_id(), newSize, widgets_to_stretch.size() - skip_count, skip_count);
+            dbg_d("newSize [%d] is: %f, count: %ld, skipCount: %d", self -> get_id(), newSize, widgets_to_stretch.size() - skip_count, skip_count);
 
             for (int i=0; i < widgets_to_stretch.size(); i++){
                 auto widget = widgets_to_stretch[i];
                 if (widget){
-                    auto ratio = widget->percent / float(100);
+                    auto ratio = widget->get_percent() / float(100);
                     dbg_d("ratio [%d]: %f", widget -> get_id(), ratio);
                     int sizeToApply = ceil(newSize * ratio);
                     if (widgets_to_stretch.size() - skip_count != i + 1){
