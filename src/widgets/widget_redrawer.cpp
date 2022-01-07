@@ -57,8 +57,12 @@ namespace widgetTools {
                 int newSize = floor((lastInner - skipInner) / (widgets_to_stretch.size() - skip_count));
                 auto widget = widgets_to_stretch[i];
                 if (widget){
-                    float ratio = widget -> percent / .100;
-                    float sizeToApply = floor(newSize * ratio);
+                    float sizeToApply =  widget -> percent * newSize / 100;
+                    // dbg_d("SizeToApply [%d]: minw: %d sizeToApply: %f", 
+                    //     widget -> get_id(), 
+                    //     stretch_min_size_value(self, widget), 
+                    //     sizeToApply
+                    // );
                     if (sizeToApply < stretch_min_size_value(self, widget) ){
                         dbg_d("Found smaller widget [%d]: minw: %d sizeToApply: %f, newSize: %d", widget -> get_id(), 
                         stretch_min_size_value(self, widget), 
